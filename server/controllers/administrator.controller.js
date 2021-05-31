@@ -6,12 +6,12 @@ exports.create_admin=(req,res)=>{
     .then(result=>{
         console.log(result)
         trigger=result
-        res.status(200).json({message:"Working"})
     }).catch(err=>{
         console.log(err)
         res.status(500).json({error:"Something Went Wrong"})
     })
-    if(trigger){
+    console.log(trigger)
+    if(!trigger){
     let administrator=new db.Administer({
         username:req.body.username,
         password:req.body.password,
