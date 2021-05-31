@@ -102,9 +102,13 @@ exports.reservation_details = async function (req,res){
 }
 
 exports.reservation_list=function(req,res){
-    Book.find({}, { projection: { _id: 0, name: 1, address: 1 } }).toArray(function(err, reservations) {
-        if (err) throw err;
-        console.log(reservations);
-        db.close();
-      });
+    db.Reservation.find()
+    .then(result=>{
+        console.log(result)
+        res.status(200).json('Working')
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json('Something Went Wrong')
+    })
 };

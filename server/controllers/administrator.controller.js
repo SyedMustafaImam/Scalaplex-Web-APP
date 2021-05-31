@@ -1,6 +1,6 @@
 const db=require('../models/index')
 exports.create_admin=(req,res)=>{
-    let trigger;
+    var trigger;
     console.log('We got >>',req.body)
     db.Administer.findOne({username:req.body.username})
     .then(result=>{
@@ -10,7 +10,7 @@ exports.create_admin=(req,res)=>{
         console.log(err)
         res.status(500).json({error:"Something Went Wrong"})
     })
-    console.log(trigger)
+    console.log("we have",trigger)
     if(!trigger){
     let administrator=new db.Administer({
         username:req.body.username,
@@ -20,7 +20,7 @@ exports.create_admin=(req,res)=>{
     administrator.save()
     .then(result=>{
         console.log(result)
-        res.status(200).json({message:"Working on Admin"})
+        res.status(201).json({message:"Admin Created"})
     })
     .catch(err=>{
         console.log(err)
