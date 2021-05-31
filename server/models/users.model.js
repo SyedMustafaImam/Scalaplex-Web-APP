@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
 let Users = new Schema({
-    firstName: { type: String, required: true, max: 10 },
-    lastName: { type: String, required: true, max: 10 },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true},
     username: { type: String, required: true },
     gender: { type: String, required: true },
-    contact: { type: Number, required: true },
+    contact: { type: String, required: true },
     city: { type: String, required: true },
     address: { type: String, required: true },
     password: { type: String, required: true },
@@ -43,7 +43,7 @@ Users.methods.generateAuthToken = async function () {
 }
 // hashing password
 Users.pre('save', async function (next) {
-    console.log(`hi from inside hash`)
+    // console.log(`hi from inside hash`)
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 12);
         console.log("this is the password",this.password)

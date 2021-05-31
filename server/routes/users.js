@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const login_controller = require('../controllers/login.controller')
 const signup_controller = require('../controllers/signup.controller')
+const validatesignupcontroller= require('../models/validation/user.validate')
 // router.get('/signup', signup_controller.register_form)
 const cookieParser =  require('cookie-parser')
 router.use(cookieParser());
@@ -13,7 +14,7 @@ router.use(cookieParser());
 // })
 router.get('/home',login_controller.auth, login_controller.home)
 router.get('/checkUser/:username', signup_controller.checkUser)
-router.post('/register', signup_controller.register)
+router.post('/register', validatesignupcontroller.validating,signup_controller.register)
 router.post('/login', login_controller.loginchk)
 router.get('/index/member/:username/edit-profile', login_controller.edit_profile)
 router.post('/index/member/:username/edit-profile', login_controller.edited_profile)
