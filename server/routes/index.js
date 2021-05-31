@@ -13,8 +13,9 @@ router.post('/admin/courseadmit')
 router.post('/admin/sectionadmit')
 router.post('/admin/registermovie',validatemovieschema.validating,moviecontroller.movie_create)
 router.post('/admin/deletemovie',moviecontroller.movie_delete)
+router.post('/admin/updatemoviedetails',moviecontroller.movie_update)
+router.get('/admin/listmovies',moviecontroller.movie_list)
 router.post('/admin/setshowtime',showtimevalidation.validating,showtimecontroller.create_showtime)
-router.post('/admin/updatemoviedetails')
 router.post('/admin/bookseat',validatereservation.validating,reservationcontroller.book_seat)
 router.get('/member/:userid', index_controller.member);
 
