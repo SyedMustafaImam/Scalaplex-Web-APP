@@ -1,24 +1,37 @@
-const Reservation=require('../models/reservation.model');
+const db =require('../models/index');
 
-
-exports.reservation_create= async function(req,res){
-    try{
-        let reservation=new Reservation({
-             movieid:req.body.movieid,
-             bookedfor:req.body.bookedfor
+exports.book_seat= async function(req,res){
+    var seats;
+    console.log('we have>>',req.body)
+    await db.Showtime.findOne({moviename:req.body.moviename}).then(result=>{
+        console.log(result.totalnoseats)
+        seats=result.totalnoseats
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something Went Wrong"})
     })
-
-    const reserved= await reservation.save();
-    if(reserved){
-        res.status(201).send('You have been reserved successfully');
+    if(seats!=0){
+        await db.Showtime.findOneAndUpdate({moviename:req.body.moviename},{$push:{seatsbooked:req.body.seatno}},{$set:{totalnoseats:seats-1}})
+        .then(result=>{
+            console.log(result)
+            res.status(201).json({message:"Created Showtime"})
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).json({error:"Something Went Wrong"})
+        })
+        await db.Reservation.findOneAndUpdate({moviename:req.body.moviename},{$push:{bookedfor:req.body.bookedfor}})
+        .then(result=>{
+            console.log(result)
+            res.status(201).json({message:"Created Showtime"})
+        }).catch(err=>{
+            console.log(err)
+            res.status(500).json({error:"Something Went Wrong"})
+        })
     }
-    }catch(err){
-        return res.status(400).send('Something went wrong');
+    else{
+        console.log('Housefull')
     }
-
-
 }
-
 
 exports.reservation_delete= async function(req,res){
     try{

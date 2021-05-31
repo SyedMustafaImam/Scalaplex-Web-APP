@@ -1,7 +1,7 @@
 const { AuthReservation }=require('./reservation.validmodel')
 exports.validating=async function(req,res,next){
     const get={
-        movieid:req.body.movieid,
+        moviename:req.body.moviename,
         bookedfor:req.body.bookedfor
         }
     try{
