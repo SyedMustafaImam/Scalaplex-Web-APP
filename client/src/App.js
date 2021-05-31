@@ -7,6 +7,7 @@ import Home from './Components/home'
 import Error from './Components/error'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './history'
+import About from "./Components/about"
 // import { createBrowserHistory } from "history";
 
 function App() {
@@ -26,10 +27,15 @@ function App() {
             <UserForm />
           </Route>
 
+          <Route path="/about" >
+            <About />
+          </Route>
 
           <Route path="/" >
             <Home />
           </Route>
+
+         
 
           <Route>
             <Error />
