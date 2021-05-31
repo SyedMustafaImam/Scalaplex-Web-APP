@@ -34,8 +34,6 @@ router.get('/admin/listcustomer',customercontroller.list_customers)
 router.post('/admin/deletecustomer',customercontroller.delete_customer)
 router.post('/admin/updatecustomer',customercontroller.update_customer)
 //==========================
-router.post('/admin/getmoveshowtime',showtimecontroller.getmovie_showtime)
-router.post('/admin/setshowtime',showtimevalidation.validating,showtimecontroller.create_showtime)
 router.post('/admin/bookseat',validatereservation.validating,reservationcontroller.book_seat)
 router.get('/member/:userid', index_controller.member);
 module.exports = router;
