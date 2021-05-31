@@ -28,3 +28,15 @@ exports.create_showtime = (req, res) => {
     })
     
 }
+exports.getmovie_showtime=(req,res)=>{
+    console.log("we have>>",req.body)
+    db.Showtime.findOne({moviename:req.body.moviename,time:req.body.time,date:req.body.date})
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({message:"List is Obtained"})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something Went Wrong"})
+    })
+}

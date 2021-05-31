@@ -15,9 +15,8 @@ router.post('/admin/registermovie',validatemovieschema.validating,moviecontrolle
 router.post('/admin/deletemovie',moviecontroller.movie_delete)
 router.post('/admin/updatemoviedetails',moviecontroller.movie_update)
 router.get('/admin/listmovies',moviecontroller.movie_list)
+router.post('/admin/getmoveshowtime',showtimecontroller.getmovie_showtime)
 router.post('/admin/setshowtime',showtimevalidation.validating,showtimecontroller.create_showtime)
 router.post('/admin/bookseat',validatereservation.validating,reservationcontroller.book_seat)
 router.get('/member/:userid', index_controller.member);
-
-
 module.exports = router;
