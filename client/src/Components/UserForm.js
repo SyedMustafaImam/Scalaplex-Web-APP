@@ -3,19 +3,19 @@ import Axios from 'axios';
 import { Form, Button, Row, Col, InputGroup } from 'react-bootstrap'
 import '../Form.css'
 import PasswordStrengthBar from 'react-password-strength-bar';
-import { NavLink, Redirect} from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 // import  history  from "../history";
 // import { createBrowserHistory } from "history";
 
 class UserForm extends Component {
- 
-    ifRegistered = ()=>{
-        if(this.state.userRegistered===true){
-        return(
-            
-            <Redirect to="/loginForm" />
-        )
-    }
+
+    ifRegistered = () => {
+        if (this.state.userRegistered === true) {
+            return (
+
+                <Redirect to="/loginForm" />
+            )
+        }
     }
 
     api = Axios.create({
@@ -27,10 +27,10 @@ class UserForm extends Component {
         firstName: '',
         lastName: '',
         username: '',
-        profession: '',
-        degree: '',
-        department: '',
-        email: '',
+        gender: '',
+        contact: '',
+        city: '',
+        address: '',
         password: '',
         conf_pass: '',
         stylePass: '',
@@ -40,13 +40,13 @@ class UserForm extends Component {
         validated: false,
         getUserfromServer: '',
         isUsernameSame: false,
-        userRegistered:false,
+        userRegistered: false,
 
 
     };
     handleSubmit = (e) => {
         e.preventDefault();
-        const form =  e.currentTarget
+        const form = e.currentTarget
         if (form.checkValidity() === false) {
             e.preventDefault();
             e.stopPropagation();
@@ -55,32 +55,33 @@ class UserForm extends Component {
     }
     submitData = (e) => {
         e.preventDefault();
-        if (this.state.firstName !== '' && this.state.lastName !== '' && this.state.username !== '' && this.state.department !== '' && this.state.email !== '' && this.state.password !== '' && this.state.conf_pass !== '' && this.state.profession!== '' && this.state.degree) {
+        if (this.state.firstName !== '' && this.state.lastName !== '' &&  this.state.city !== '' && this.state.address !== '' && this.state.password !== '' && this.state.conf_pass !== '' && this.state.contact !== '' && this.state.gender) {
             this.setState({ formIsFilled: true })
-     
-            if(this.state.password === this.state.conf_pass){
+
+            if (this.state.password === this.state.conf_pass) {
                 this.api.post('register', this.state).then(result => {
-                    if(result.status === 201){
+                    if (result.status === 201) {
                         window.alert("New user created");
-                        this.setState({userRegistered:true})
+                        this.setState({ userRegistered: true })
                     }
-                }).catch(err => {console.log(err)
-                    window.alert(`Unable to create user ${err}` )
-                    this.setState({userRegistered:false})
+                }).catch(err => {
+                    console.log(err)
+                    window.alert(`Unable to create user ${err}`)
+                    this.setState({ userRegistered: false })
                 })
-            }else{
-        this.setState({passstats: false})
-        window.alert('Error Password does not match')
-        }
-     
+            } else {
+                this.setState({ passstats: false })
+                window.alert('Error Password does not match')
+            }
+
         } else {
             window.alert('Please fill all the fields')
-         
+
             this.setState({ formIsFilled: false })
         }
 
 
-     
+
     }
 
 
@@ -107,7 +108,6 @@ class UserForm extends Component {
     }
 
     getUserName = () => {
-
         this.api.get('checkUser', {
             param: { username: this.state.username }
         }).then(result => {
@@ -126,7 +126,7 @@ class UserForm extends Component {
         this.setState({
             [name]: value
         });
-        if (this.state.firstName !== '' && this.state.lastName !== '' && this.state.username !== '' && this.state.department !== '' && this.state.email !== '' && this.state.password !== '' && this.state.conf_pass !== '' && this.state.profession!== '' && this.state.degree) {
+        if (this.state.firstName !== '' && this.state.lastName !== '' && this.state.username !== '' && this.state.gender !== '' && this.state.city !== '' && this.state.email !== '' && this.state.password !== '' && this.state.conf_pass !== '' && this.state.contact !== '' && this.state.address) {
             this.setState({ formIsFilled: true })
         } else {
             this.setState({ formIsFilled: false })
@@ -165,9 +165,9 @@ class UserForm extends Component {
     }
 
     render() {
-        let radios = { 'Teacher': 'teacher', 'Student': 'student' }
+        let radios = { 'Male': 'male', 'Female': 'female','Others':'others' }
         let radioBtn = Object.entries(radios).map(([key, value], i) => (
-            <Form.Check key={i} inline type="radio" name="profession" required onChange={this.handleChange} value={value} label={key} />
+            <Form.Check key={i} inline type="radio" name="gender" required onChange={this.handleChange} value={value} label={key} />
         ));
 
         return (
@@ -193,64 +193,53 @@ class UserForm extends Component {
                     </Row>
                     <Row>
                         <Col xs={4}>
-                            <Form.Label>User/ Registration Id</Form.Label>
-                                <Form.Group controlId="formusername">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Group controlId="formusername">
 
-                                    <Form.Control style={{ "font-size": "10px" }} type="text" name="username" value={this.state.username} onChange={this.handleChangeUserName} required placeholder="Enter your registration id or username"  />
-                                    <Form.Text style={this.state.isUsernameSame !== false ? { "font-size": "9px", "color": "red" } : { "font-size": "9px", "color": "green" }}>
-                                        {this.state.usernameError}
+                                <Form.Control style={{ "font-size": "10px" }} type="email" name='username' value={this.state.username} onChange={this.handleChangeUserName} required placeholder="Enter your registration id or username" />
+                                <Form.Text style={this.state.isUsernameSame !== false ? { "font-size": "9px", "color": "red" } : { "font-size": "9px", "color": "green" }}>
+                                    {this.state.usernameError}
 
-                                    </Form.Text>
-                                </Form.Group>
-                        </Col>
-                        <Col xs={2}>
-                            <Form.Group controlId="formBasicRadiobox" >
-                                <Form.Label>Profession</Form.Label>
-                                <br style={{ "padding-top": "5%" }}></br>
-                                {radioBtn}
-                            </Form.Group>
-                            
-                        </Col>
-                        <Col xs={6}>
-                            <Form.Group controlId="exampleForm.ControlSelect1">
-                                <Form.Label>Degree</Form.Label>
-                                <Form.Control style={{ "font-size": "10px" }} name='degree' onChange={this.handleChange} required value={this.state.degree} as="select">
-                                    <option hidden value=''>Your Degree</option>
-                                    <option>Bachelor</option>
-                                    <option>Masters</option>
-                                    <option>Phd</option>
-                                </Form.Control>
-
-
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                        <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Email address</Form.Label>
-                                <Form.Control style={{ "font-size": "10px" }} type="email" name='email' value={this.state.email} onChange={this.handleChange} required placeholder="Enter email" />
+                                </Form.Text>
                                 <Form.Text className="text-muted">
                                     We'll never share your email with anyone else.
                                 </Form.Text>
                             </Form.Group>
-                        
                         </Col>
+                        <Col xs={2}>
+                            <Form.Group controlId="formBasicRadiobox" >
+                                <Form.Label>Gender</Form.Label>
+                                <br style={{ "padding-top": "5%" }}></br>
+                                {radioBtn}
+                            </Form.Group>
+
+                        </Col>
+                        <Col xs={6}>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Label>Contact No.</Form.Label>
+                                <Form.Control style={{ "font-size": "10px" }} type="number" name="contact" value={this.state.contact} onChange={this.handleChange} required placeholder="Enter your Contact No." />                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                   
                         <Col>
                             <Form.Group controlId="exampleForm.ControlSelect1">
-                                <Form.Label>Department</Form.Label>
-                                <Form.Control style={{ "font-size": "10px" }} name='department' onChange={this.handleChange} required value={this.state.department} as="select">
-                                    <option hidden value=''>Your Department</option>
-                                    <option>Computer Science</option>
-                                    <option>Mechatronics</option>
-                                    <option>Business Adminstration</option>
-                                    <option>Media Science</option>
-                                    <option>Bio Science</option>
-                                    <option>Bio Technology</option>
-                                    <option>Social Science</option>
-                                    <option>Law</option>
+                                <Form.Label>City</Form.Label>
+                                <Form.Control style={{ "font-size": "10px" }} name='city' onChange={this.handleChange} required value={this.state.city} as="select">
+                                    <option hidden value=''>Your City</option>
+                                    <option>Karachi</option>
+                                    <option>Lahore</option>
+                                    <option>Islamabad</option>
+                                    <option>Multan</option>
+                                    <option>Sukhar</option>
+                                    <option>Hyderabad</option>
                                 </Form.Control>
                             </Form.Group>
+                        </Col>
+                        <Col xs={6}>
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control style={{ "font-size": "10px" }} type="text" name="address" value={this.state.address} onChange={this.handleChange} required placeholder="Enter your address" />                            </Form.Group>
                         </Col>
                     </Row>
                     <Row>
@@ -286,11 +275,11 @@ class UserForm extends Component {
                         <Button variant="success" type="submit" onClick={this.submitData} disabled={this.state.formIsFilled !== true || this.state.passstats !== true || this.state.isUsernameSame !== false ? true : false}>
                             Sign Up
                         </Button>
-                        </NavLink>
-                        {this.ifRegistered()}
+                    </NavLink>
+                    {this.ifRegistered()}
                 </Form>
-                {/* <br></br>
-                <prev>{JSON.stringify(this.state, null, 2)}</prev> */}
+                <br></br>
+                <prev style={{'color':'white'}}>{JSON.stringify(this.state, null, 2)}</prev>
             </div >
         )
     }

@@ -7,10 +7,10 @@ let Users = new Schema({
     firstName: { type: String, required: true, max: 10 },
     lastName: { type: String, required: true, max: 10 },
     username: { type: String, required: true },
-    profession: { type: String, required: true },
-    degree: { type: String, required: true },
-    department: { type: String, required: true },
-    email: { type: String, required: true },
+    gender: { type: String, required: true },
+    contact: { type: Number, required: true },
+    city: { type: String, required: true },
+    address: { type: String, required: true },
     password: { type: String, required: true },
 
     tokens: [
