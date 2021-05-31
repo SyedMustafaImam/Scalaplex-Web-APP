@@ -41,17 +41,24 @@ const [name, setName]=useState('');
               
         })
     }
+
+    const getList = ()=>{
+        axios.get('/index/admin/getmoveshowtime').then(result=>{
+            console.log(result)
+        }).catch(err=>{console.log(err)})
+    }
+
     useEffect(()=>{
         auth();
-        
+        getList()
     }, [])
                  
- 
     return (
         
         < div className = { "homeHeader"} >
             
             <Container >
+                {getList}
                 <Row className={"heading justify-content-md-center"}>
                     <h5 className={"heading"}>Welcome {name}</h5>
                 </Row >
