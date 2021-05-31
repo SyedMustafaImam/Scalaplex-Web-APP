@@ -2,6 +2,7 @@ const db=require('../models/index');
 exports.movie_create=(req,res)=>{
     console.log('we are movie create')
     console.log(req.body)
+
         let movie=new db.Movies({
             moviename:req.body.moviename,
             movieboughtdate:req.body.movieboughtdate,

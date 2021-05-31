@@ -1,7 +1,15 @@
 const db = require('../models/index')
 
 exports.create_showtime = (req, res) => {
+    var trigger;
     console.log('we got >>', req.body)
+    db.Showtime.findOne({time:req.body.time,date: req.body.date})
+    .then(result=>{
+        console.log(result)
+        trigger=result
+    })
+    .catch(err=>console.log(err))
+    if(trigger!=null){
     let showtime = new db.Showtime({
         moviename:req.body.moviename,
         totalnoseats:req.body.totalnoseats,
@@ -26,6 +34,9 @@ exports.create_showtime = (req, res) => {
         console.log(err)
         res.status(500).json({error:"Something went wrong"})
     })
+}else{
+    console.log("sorry date and time are taken")
+}
     
 }
 exports.getmovie_showtime=(req,res)=>{
