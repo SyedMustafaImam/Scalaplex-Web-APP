@@ -5,7 +5,6 @@ import LoginForm from './Components/LoginForm'
 import Navbars from './Components/Navbars'
 import Home from './Components/home'
 import Error from './Components/error'
-import TeachersDashboard from "./Components/teachersDashboard"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './history'
 // import { createBrowserHistory } from "history";
@@ -15,10 +14,7 @@ function App() {
     <Router history={history}>
       <div class="myBody">
         <Navbars />
-
-<TeachersDashboard/>
-
-{/*         
+        
 
         <Switch>
 
@@ -39,7 +35,7 @@ function App() {
             <Error />
           </Route>
 
-        </Switch> */}
+        </Switch>
 
       </div>
     </Router>

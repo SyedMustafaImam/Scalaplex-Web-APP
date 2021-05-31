@@ -1,13 +1,18 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { Navbar, Nav, Button } from 'react-bootstrap'
+import { useCookies } from 'react-cookie';
+
 import { NavLink } from 'react-router-dom'
 import '../NavBar.css'
 import {useHistory}from 'react-router-dom'
 
 export default function Navbars() {
-
+    // const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
     const history = useHistory();
-
+    const logout=() =>{
+        // removeCookie("JWTtoken", { path: '/' })
+        // <Redirect to='LoginForm'
+    }
     return (
         <div >
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -30,6 +35,7 @@ export default function Navbars() {
                         <NavLink className='NavBarOpt' eventKey={2} to="/UserForm">
                             Sign Up
                         </NavLink>
+                        <Button variant="warning" onClick={logout()}>Log Out</Button>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

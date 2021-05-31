@@ -45,7 +45,7 @@ const [name, setName]=useState('');
                     </Row >
                     <Row className={"para justify-content-md-center"}>
                         <p >
-                            To virtual teacher's Virtual Assistant
+                            To App Name
                         </p>
                     </Row>
                 </Container>
