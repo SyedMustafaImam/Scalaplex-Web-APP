@@ -20,7 +20,7 @@ class UserForm extends Component {
 
     api = Axios.create({
         baseURL: 'http://localhost:5000/',
-        timeout: 2000
+        timeout: 3000
     })
 
     state = {
