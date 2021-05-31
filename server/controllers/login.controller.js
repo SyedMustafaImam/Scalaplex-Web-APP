@@ -5,23 +5,23 @@ var mongo = require('mongodb');
 
 exports.loginchk = async (req, res) => {
     const { username, password } = req.body;
-    // console.log(`${username} <=> ${password}`);
+    console.log(`${username} <=> ${password}`);
     try {
         if (!username || !password) {
             return res.status(404).json({ error: 'Please enter all the credentials' })
         } else {
 
             const userLogin = await db.Users.findOne({ username: username });
-            // console.log(userLogin);
+            console.log(userLogin);
 
             if (userLogin) {
                 const isMatch = await bcrypt.compare(password, userLogin.password)
-                // console.log(isMatch)
+                console.log(isMatch)
                 const token = await userLogin.generateAuthToken();
-                // console.log(`token => ${token}`)
+                console.log(`token => ${token}`)
 
                 // storing token in cookie 
-                // console.log('cookie :>> ', token);
+                console.log('cookie :>> ', token);
                 res.cookie('jwtoken', token, {
                     expires: new Date(Date.now() + 2500000000),
                     httpOnly: true
@@ -34,9 +34,9 @@ exports.loginchk = async (req, res) => {
 
                 } else {
                     // If Every thing is ture then this method
-
-                    req.session.user = userLogin;
+                    console.log('every thing is matched')
                     console.log(`/index/member/${req.session.user.username}`)
+                    req.session.user = userLogin;
                     // res.redirect('index/member/' + req.session.user.username)
                     // return res.status(200).json({ logedin_to: `/index/member/${req.session.user.username}` })
 
@@ -51,13 +51,13 @@ exports.loginchk = async (req, res) => {
 
         }
     } catch (err) {
-        // console.log('got here')
+        console.log('got here')
         console.log(err)
     }
 }
 
 exports.home = (req,res)=>{
-    // console.log('My Home Page');
+    console.log('My Home Page');
     res.send(req.rootUser)
 }
 
@@ -67,12 +67,12 @@ exports.auth = async (req, res, next)=>{
 const token = req.cookies.JWTtoken;
 const verifyToken = jwt.verify(token, process.env.SECRET_KEY)
 const obj_id = new mongo.ObjectId(verifyToken._id);
-// console.log('object ID :>> ', obj_id);
+console.log('object ID :>> ', obj_id);
 const rootUser = await db.Users.findOne({'_id': obj_id, "tokens.token":token})
 
-// console.log('token :>> ', token);
-// console.log('verifyToken :>> ', verifyToken);
-// console.log('rootUser :>> ', rootUser);
+console.log('token :>> ', token);
+console.log('verifyToken :>> ', verifyToken);
+console.log('rootUser :>> ', rootUser);
 
 if(!rootUser){
     throw new Error("User Not Found")

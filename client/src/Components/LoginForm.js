@@ -102,8 +102,6 @@ class LoginForm extends Component {
         return (
 
             <div id="logCont" transition={false} className="container mainDiv" >
-
-
                 <Row className=" loginBox">
                     <Col >
                         <Form method="POST"  onSubmit={this.handleSubmit}>
