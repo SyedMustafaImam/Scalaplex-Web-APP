@@ -35,8 +35,7 @@ const About =()=> {
                     <p >
                     Being at the pinnacle of technology, design and art, Scalaplex Cinemas is the standard by which all visual and aural presentation is judged. Our mission is simple, to provide the most remarkable cinema experience in the world right here in Pakistan. Scalaplex Cinemas is a revolution, an ambitious and challenging idea bought to life and a film lover's paradise.
                     </p>
-                </Row>
-            
+                </Row>            
             </Container>
             
             <Container>
@@ -64,8 +63,8 @@ const About =()=> {
                 </Carousel.Item>
                 </Carousel>
             </Container>      
-    < div className = { "aboutFooter" } ></div>
-            </div>
+        < div className = { "aboutFooter" } ></div>
+        </div>
             
     )
 }

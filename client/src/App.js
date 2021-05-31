@@ -8,7 +8,9 @@ import Error from './Components/error'
 import About from './Components/about'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Admin from'./Components/admin'
+import NewsEvent from './Components/newsEvent';
 import { makeStyles } from "@material-ui/core/styles";
+
 
 const useStyles = makeStyles({
   container: {
@@ -37,6 +39,11 @@ function App() {
           <Route path="/Aboutus">
             <About />
           </Route>
+
+          <Route path="/NewsEvents">
+            <NewsEvent />
+          </Route>
+
           <Route path="/admin">
             <Admin />
           </Route>
