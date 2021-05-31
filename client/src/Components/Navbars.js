@@ -1,18 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import { useCookies } from 'react-cookie';
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import '../NavBar.css'
-import {useHistory}from 'react-router-dom'
 
 export default function Navbars() {
-    // const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
-    const history = useHistory();
-    const logout=() =>{
-        // removeCookie("JWTtoken", { path: '/' })
-        // <Redirect to='LoginForm'
+    const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
+    const [isLogedOut, setisLogedOut] = useState(false)
+
+
+    const checkLogIn = () => {
+        
+        if (!cookies.JWTtoken) {
+            return (
+                <>
+                    <NavLink className='NavBarOpt' to="/loginForm">Log In</NavLink>
+                    <NavLink className='NavBarOpt' eventKey={2} to="/UserForm">
+                        Sign Up
+                    </NavLink>
+                    <Button variant="warning" onClick={logout}>Log Out</Button>
+                    <Redirect to='/loginForm' />
+                </>
+            )
+        }
+        else {
+            return (<Button variant="warning" onClick={logout}>Log Out</Button>)
+        }
     }
+
+    const logout = () => {
+        removeCookie("JWTtoken", { path: '/' })
+        setisLogedOut(true)
+        window.location.reload(false);
+        return (<Redirect to='/LoginForm' />)
+
+    }
+    const IfLogedOut = () => {
+        
+            window.location.reload(false);
+            setisLogedOut(true)
+    }
+
     return (
         <div >
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -31,14 +60,18 @@ export default function Navbars() {
                         </NavDropdown> */}
                     </Nav>
                     <Nav>
-                        <NavLink className='NavBarOpt' to="/loginForm">Log In</NavLink>
+                        {/* <NavLink className='NavBarOpt' to="/loginForm">Log In</NavLink>
                         <NavLink className='NavBarOpt' eventKey={2} to="/UserForm">
                             Sign Up
                         </NavLink>
-                        <Button variant="warning" onClick={logout()}>Log Out</Button>
+                        <Button variant="warning" onClick={logout}>Log Out</Button>
+                        {IfLogedOut()} */}
+                        {checkLogIn()}
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+
         </div>
     )
 }

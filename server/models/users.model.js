@@ -43,7 +43,7 @@ Users.methods.generateAuthToken = async function () {
 }
 // hashing password
 Users.pre('save', async function (next) {
-    console.log(`hi from inside hash`)
+    // console.log(`hi from inside hash`)
     if (this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 12);
         console.log("this is the password",this.password)
