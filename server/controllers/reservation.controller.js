@@ -2,6 +2,7 @@ const db =require('../models/index');
 
 exports.book_seat= async function(req,res){
     var seats;
+    try{
     console.log('we have>>',req.body)
     await db.Showtime.findOne({moviename:req.body.moviename}).then(result=>{
         console.log(result.totalnoseats)
@@ -31,6 +32,9 @@ exports.book_seat= async function(req,res){
     else{
         console.log('Housefull')
     }
+}catch(err){
+    console.log(err)
+}
 }
 
 exports.reservation_delete= async function(req,res){
@@ -61,9 +65,13 @@ exports.reservation_details = async function (req,res){
 }
 
 exports.reservation_list=function(req,res){
-    Book.find({}, { projection: { _id: 0, name: 1, address: 1 } }).toArray(function(err, reservations) {
-        if (err) throw err;
-        console.log(reservations);
-        db.close();
-      });
+    db.Reservation.find()
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({message:"Working"})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something Went Wrong"})
+    })
 };
