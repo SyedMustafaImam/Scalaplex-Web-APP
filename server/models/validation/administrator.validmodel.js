@@ -1,6 +1,6 @@
 const joi = require('joi')
 let AuthAdminSchema= joi.object({
-   username:joi.string().lowercase().required(),
+   username:joi.string().email().required(),
    password:joi.string().length(8).pattern(new RegExp('^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$')).required(),
    status:joi.string().valid('Active','Inactive').required()
 })

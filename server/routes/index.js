@@ -12,19 +12,20 @@ const express = require('express');
 let router = express.Router();
 
 router.get('/admin', index_controller.admin);
-router.post('/admin/courseadmit')
+router.post('/admin/courseadmit',)
 router.post('/admin/sectionadmit')
 router.post('/admin/registermovie',validatemovieschema.validating,moviecontroller.movie_create)
 router.post('/admin/deletemovie',moviecontroller.movie_delete)
 router.post('/admin/updatemoviedetails',moviecontroller.movie_update)
 router.get('/admin/listmovies',moviecontroller.movie_list)
 //=============Showtime
-router.get('/admin/getmoveshowtime',showtimecontroller.getmovie_showtime)
+router.post('/admin/getmoveshowtime',showtimecontroller.getmovie_showtime)
 router.post('/admin/setshowtime',showtimevalidation.validating,showtimecontroller.create_showtime)
 router.get('/admin/listshowtime',showtimecontroller.list_showtime)
 //=============Reservation
 router.post('/admin/bookseat',validatereservation.validating,reservationcontroller.book_seat)
 router.get('/admin/showreservation',reservationcontroller.reservation_list)
+router.post('/admin/deletereservation',reservationcontroller.reservation_delete)
 //=============Administration Admin CRUD
 router.post('/admin/createnewadmin',validateadmin.validating,admincontroller.create_admin)
 router.post('/admin/deleteadmin',admincontroller.delete_admin)

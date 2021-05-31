@@ -9,11 +9,11 @@ exports.create_admin=(req,res)=>{
     administrator.save()
     .then(result=>{
         console.log(result)
-        res.send(200).json({message:"Working on Admin"})
+        res.status(200).json({message:"Working on Admin"})
     })
     .catch(err=>{
         console.log(err)
-        res.send(500).json({message:"Something Went Wrong"})
+        res.status(500).json({message:"Something Went Wrong"})
     })
 }
 exports.list_admin=(req,res)=>{
