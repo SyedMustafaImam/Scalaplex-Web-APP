@@ -1,7 +1,7 @@
 module.exports = {
     Users: require('./users.model'),
     Administer :require('./administrator.model'),
-    Reservatio:require('./reservation.model'),
+    Reservation:require('./reservation.model'),
     Movies:require('./movies.model')
 }
 
