@@ -19,23 +19,28 @@ exports.movie_create=(req,res)=>{
 }
 
 
-exports.movie_delete= async function(req,res){
+exports.movie_delete= (req,res)=>{
     console.log('We are deleting now',req.body)
-
-        await db.Movies.findByIdAndRemove({moviename:req.body.moviename})
-        .then(result=>{
-            console.log("deleted",result)
-            res.status(200).json({message:"Deleted"})
-        }).catch(err=>{
-            console.log(err)
-            res.status(500).json({error:"Something Went Wrong"})
-        })
-        
+    try{
+     array.forEach(element => {
+        console.log(element)
+         db.Movies.findOneAndDelete({moviename:element.moviename})
+         .then(result=>{
+             console.log("deleted",result)
+             res.status(200).json({message:"Deleted"})
+         }).catch(err=>{
+             console.log(err)
+             res.status(500).json({error:"Something Went Wrong"})
+         })
+     });
+    }catch(err){
+        console.log(err)
+    }
     }
 
 exports.movie_update = async function(req,res){
     try{
-        const updateMovie = await db.Movies.findByIdAndUpdate(req.params.id, {$set:req.body});
+        const updateMovie = await db.Movies.findOneAndUpdate(req.params.id, {$set:req.body});
         return res.status(200).send("Movie has been updated successfully");
     }catch(err){
         return res.status(400).send("This Movie doesn't exist")
