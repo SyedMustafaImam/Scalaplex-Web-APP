@@ -3,6 +3,7 @@ import {Tabs, Tab} from 'react-bootstrap'
 import AddNewMovie from '../Components/movie'
 import {EnhancedTable} from '../Components/movie'
 
+
 import './admin.css'
 export default function admin() {
     return (
