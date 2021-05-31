@@ -6,13 +6,20 @@ import Navbars from './Components/Navbars'
 import Home from './Components/home'
 import Error from './Components/error'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import history from './history'
-import About from "./Components/about"
+import Admin from'./Components/admin'
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  container: {
+    display: "flex"
+  }
+});
+
 // import { createBrowserHistory } from "history";
 
 function App() {
   return (
-    <Router history={history}>
+    <Router>
       <div class="myBody">
         <Navbars />
         
@@ -26,9 +33,8 @@ function App() {
           <Route path="/UserForm">
             <UserForm />
           </Route>
-
-          <Route path="/about" >
-            <About />
+          <Route path="/admin">
+            <Admin />
           </Route>
 
           <Route path="/" >
@@ -42,7 +48,7 @@ function App() {
           </Route>
 
         </Switch>
-
+        
       </div>
     </Router>
   );
