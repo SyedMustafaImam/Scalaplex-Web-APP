@@ -11,13 +11,15 @@ exports.validating=async function(req,res,next){
         const result=await AuthMovies.validateAsync(get)
         console.log(get)
         console.log(result)
-        res.status(200).json({message:"validated"})
+        console.log(`validated`, validated)
+        // res.status(200).json({message:"validated"})
         next()
     }
     catch(err){
         if(err.isJoi===true) err.status=422
         console.log("there has been an error Credentials are not correct:",err)
-        res.send(err)
+        // res.send(err)
+        console.log(`err in the catch`, err)
         next(err)
     }
     

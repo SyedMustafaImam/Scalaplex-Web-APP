@@ -5,6 +5,7 @@ import LoginForm from './Components/LoginForm'
 import Navbars from './Components/Navbars'
 import Home from './Components/home'
 import Error from './Components/error'
+import About from './Components/about'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Admin from'./Components/admin'
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,6 +33,9 @@ function App() {
 
           <Route path="/UserForm">
             <UserForm />
+          </Route>
+          <Route path="/Aboutus">
+            <About />
           </Route>
           <Route path="/admin">
             <Admin />
