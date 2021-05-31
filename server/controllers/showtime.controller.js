@@ -44,7 +44,8 @@ exports.getmovie_showtime=(req,res)=>{
     db.Showtime.findOne({moviename:req.body.moviename,time:req.body.time,date:req.body.date})
     .then(result=>{
         console.log(result)
-        res.status(200).json({message:"List is Obtained"})
+        res.send(result)
+        // res.status(200).json({message:"List is Obtained"})
     })
     .catch(err=>{
         console.log(err)
@@ -55,7 +56,7 @@ exports.list_showtime=(req,res)=>{
     db.Showtime.find()
     .then(result=>{
         console.log(result)
-        res.status(200).json({message:"Working Properly"})
+        res.status(200).send(result)
     })
     .catch(err=>{
         console.log(err)
