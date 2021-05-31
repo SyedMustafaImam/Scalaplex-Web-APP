@@ -16,7 +16,7 @@ export default function Navbars() {
     return (
         <div >
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <NavLink className='NavBarBrand' to="/">Teacher's VA</NavLink>
+                <NavLink className='NavBarBrand' to="/">SCALAPLEX CINEMAS</NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">

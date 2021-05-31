@@ -45,7 +45,7 @@ const [name, setName]=useState('');
                     </Row >
                     <Row className={"para justify-content-md-center"}>
                         <p >
-                            To App Name
+                            To SCALAPLEX CINEMAS
                         </p>
                     </Row>
                 </Container>
