@@ -1,20 +1,29 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import { useCookies } from 'react-cookie';
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import '../NavBar.css'
-import {useHistory}from 'react-router-dom'
 
 export default function Navbars() {
-    // const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
-    const history = useHistory();
+    const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
+    const [isLogedOut, setisLogedOut ] = useState(false)
+
     const logout=() =>{
-        // removeCookie("JWTtoken", { path: '/' })
-        // <Redirect to='LoginForm'
+        removeCookie("JWTtoken", { path: '/' })
+        setisLogedOut(true)
+        window.location.reload(false);
+        return (<Redirect to='/login' />)
     }
+    const IfLogedOut =()=>{
+        if(isLogedOut===true){
+        return (<Redirect to='/' />)
+    }
+}
+   
     return (
         <div >
+            
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <NavLink className='NavBarBrand' to="/">SCALAPLEX CINEMAS</NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -35,10 +44,12 @@ export default function Navbars() {
                         <NavLink className='NavBarOpt' eventKey={2} to="/UserForm">
                             Sign Up
                         </NavLink>
-                        <Button variant="warning" onClick={logout()}>Log Out</Button>
+                        <Button variant="warning" onClick={logout}>Log Out</Button>
+                        {IfLogedOut()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+            
         </div>
     )
 }

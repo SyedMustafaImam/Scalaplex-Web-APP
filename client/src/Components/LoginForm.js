@@ -106,7 +106,7 @@ class LoginForm extends Component {
 
                 <Row className=" loginBox">
                     <Col >
-                        <Form method="POST" style={{ "width": "60%", "margin-left": "10%" }} onSubmit={this.handleSubmit}>
+                        <Form method="POST"  onSubmit={this.handleSubmit}>
                             <h1>Log In</h1>
                             <hr></hr>
 

@@ -279,7 +279,7 @@ class UserForm extends Component {
                     {this.ifRegistered()}
                 </Form>
                 <br></br>
-                <prev style={{'color':'white'}}>{JSON.stringify(this.state, null, 2)}</prev>
+                {/* <prev style={{'color':'white'}}>{JSON.stringify(this.state, null, 2)}</prev> */}
             </div >
         )
     }
