@@ -1,6 +1,23 @@
-const db= require('../models/index')
-exports.list_customers=(req,res)=>{
-    db.Users.find()
+const db=require('../models/index')
+exports.create_admin=(req,res)=>{
+    console.log('We got >>',res.body)
+    let administrator=new db.Administer({
+        username:req.body.username,
+        password:req.body.password,
+        status:req.body.status
+    })
+    administrator.save()
+    .then(result=>{
+        console.log(result)
+        res.send(200).json({message:"Working on Admin"})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.send(500).json({message:"Something Went Wrong"})
+    })
+}
+exports.list_admin=(req,res)=>{
+    db.Administer.find()
     .then(result=>{
         console.log(result)
         res.status(200).json({message:"Working Properly"})
@@ -10,13 +27,13 @@ exports.list_customers=(req,res)=>{
         res.status(500).json({error:"Something Went Wrong"})
     })
 }
-exports.delete_customer=(req,res)=>{
+exports.delete_admin=(req,res)=>{
     console.log('We are deleting now',req.body)
     var ar=[ "smustafa086@gmail.com", "davi@gmail.com"]
     try{
      ar.forEach(element => {
         console.log(element)
-         db.Users.findOneAndDelete({username:element})
+         db.Administer.findOneAndDelete({username:element})
          .then(result=>{
              console.log("deleted",result)
              res.status(200).json({message:"Deleted"})
@@ -28,7 +45,4 @@ exports.delete_customer=(req,res)=>{
     }catch(err){
         console.log(err)
     }
-}
-exports.update_customer=(req,res)=>{
-    
 }
