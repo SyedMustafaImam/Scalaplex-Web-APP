@@ -51,3 +51,14 @@ exports.getmovie_showtime=(req,res)=>{
         res.status(500).json({error:"Something Went Wrong"})
     })
 }
+exports.list_showtime=(req,res)=>{
+    db.Showtime.find()
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({message:"Working Properly"})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something Went Wrong"})
+    })
+}

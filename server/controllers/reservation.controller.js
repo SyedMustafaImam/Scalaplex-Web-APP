@@ -1,6 +1,7 @@
 const db =require('../models/index');
 
 exports.book_seat= async function(req,res){
+    try{
     var seats;
     console.log('we have>>',req.body)
     await db.Showtime.findOne({moviename:req.body.moviename}).then(result=>{
@@ -32,6 +33,9 @@ exports.book_seat= async function(req,res){
     else{
         console.log('Housefull')
     }
+}catch(err){
+    console.log(err)
+}
 }
 
 exports.reservation_delete= async function(req,res){
