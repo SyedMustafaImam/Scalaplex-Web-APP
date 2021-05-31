@@ -48,7 +48,9 @@ export default function Navbars() {
                 <NavLink className='NavBarBrand' to="/">SCALAPLEX CINEMAS</NavLink>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
+
                     <Nav className="mr-auto">
+               
                         {/* <Nav.Link href="#features">Features</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link> */}
                         {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
@@ -66,8 +68,10 @@ export default function Navbars() {
                         </NavLink>
                         <Button variant="warning" onClick={logout}>Log Out</Button>
                         {IfLogedOut()} */}
-                        {checkLogIn()}
-
+                        
+                        <NavLink className='NavBarOpt' to="/">Home</NavLink>
+                <NavLink className='NavBarOpt' to="/Aboutus">About Us</NavLink>
+                {checkLogIn()}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
