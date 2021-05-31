@@ -12,7 +12,7 @@ exports.list_customers=(req,res)=>{
 }
 exports.delete_customer=(req,res)=>{
     console.log('We are deleting now',req.body)
-    var ar=[ "smustafa086@gmail.com", "davi@gmail.com"]
+    var ar=[ "smustafa086@gmail.com", "juli@gmail.com"]
     try{
      ar.forEach(element => {
         console.log(element)

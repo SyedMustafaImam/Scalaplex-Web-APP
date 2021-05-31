@@ -36,6 +36,7 @@ exports.book_seat= async function(req,res){
     }
     else{
         console.log('Housefull')
+        res.status(200).json({message:"Working Well"})
     }
     }else{
         console.log('Sorry seat is taken')
