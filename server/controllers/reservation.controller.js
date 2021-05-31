@@ -11,8 +11,9 @@ exports.book_seat= async function(req,res){
         console.log(err)
         res.status(500).json({error:"Something Went Wrong"})
     })
+    console.log(seats)
     if(seats!=0){
-        await db.Showtime.findOneAndUpdate({moviename:req.body.moviename},{$push:{seatsbooked:req.body.seatno}},{$set:{totalnoseats:seats-1}})
+        await db.Showtime.findOneAndUpdate({moviename:req.body.moviename},{$push:{seatsbooked:req.body.seatno},$set:{totalnoseats:seats-1}})
         .then(result=>{
             console.log(result)
             res.status(201).json({message:"Created Showtime"})
