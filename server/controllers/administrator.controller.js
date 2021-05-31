@@ -1,8 +1,8 @@
 const db=require('../models/index')
 exports.create_admin=(req,res)=>{
     let trigger;
-    console.log('We got >>',res.body)
-    db.Administe.findOne({username:req.body.username})
+    console.log('We got >>',req.body)
+    db.Administer.findOne({username:req.body.username})
     .then(result=>{
         console.log(result)
         trigger=result
