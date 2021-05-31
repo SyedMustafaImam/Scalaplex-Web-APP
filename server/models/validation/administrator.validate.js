@@ -1,4 +1,4 @@
-const { AuthAdminSchema }=require('./users.vallidatescheme')
+const { AuthAdminSchema }=require('./administrator.validmodel')
 exports.validating=async function(req,res,next){
     const get={
         username:req.body.username,

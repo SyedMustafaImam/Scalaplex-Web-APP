@@ -1,4 +1,4 @@
-const { AuthReservation }=require('./users.vallidatescheme')
+const { AuthReservation }=require('./reservation.validmodel')
 exports.validating=async function(req,res,next){
     const get={
         movieid:req.body.movieid,

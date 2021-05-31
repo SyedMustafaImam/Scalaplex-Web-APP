@@ -1,31 +1,24 @@
-const Movie=require('../models/movies.model');
-
-
-exports.movie_create= async function(req,res){
-    try{
-        let movie=new Movie({
+const db=require('../models/index');
+exports.movie_create= function(req,res){
+    console.log('we are movie create')
+    console.log(req.body)
+        let movie=new db.Movies({
         movieid:req.body.movieid,
         moviename:req.body.moviename,
-        theatreno:req.body.theatreno,
+        theaterno:req.body.theaterno,
         seats:req.body.seats,
-        time:req.body.time        
+        time:req.body.time,
+        date:req.body.date
     })
-
-    const movieRegister= await movie.save();
-    if(movieRegister){
-        res.status(201).send('Movie has been added successfully');
-    }
-    }catch(err){
-        return res.status(400).send('Something went wrong');
-    }
-
-
+    movie.save().then(result=>{
+        console.log('Saved>>',result)
+    }).catch(err=>console.log(err))
 }
 
 
 exports.movie_delete= async function(req,res){
     try{
-        await Movie.findByIdAndRemove(req.params.id);
+        await db.Movies.findByIdAndRemove(req.params.id);
         return res.status(200).send('Movie has been Deleted');
     } catch (err) {
         return res.status(400).send("This Movie does not exist");
@@ -34,7 +27,7 @@ exports.movie_delete= async function(req,res){
 
 exports.movie_update = async function(req,res){
     try{
-        const updateMovie = await Movie.findByIdAndUpdate(req.params.id, {$set:req.body});
+        const updateMovie = await db.Movies.findByIdAndUpdate(req.params.id, {$set:req.body});
         return res.status(200).send("Movie has been updated successfully");
     }catch(err){
         return res.status(400).send("This Movie doesn't exist")
@@ -42,7 +35,7 @@ exports.movie_update = async function(req,res){
 }
 exports.movie_details = async function (req,res){
     try{
-        const movie=await movie.findById(req.params.id);
+        const movie=await db.Movies.findById(req.params.id);
         res.status(200).send(movie);
     }catch(err){
         return res.status(400).send("This Movie does not exist in our record");

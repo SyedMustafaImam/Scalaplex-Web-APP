@@ -7,6 +7,6 @@ let Movies = new Schema({
     theaterno:{type:String,required:true},
     seats:{type:Number,required:true},
     time:{type:String,required:true},
-    date:{type:Date,default:Date.now}
+    date:{type:String,required:true}
 })
 module.exports = mongoose.model('Movie',Movies);
