@@ -3,16 +3,27 @@ exports.movie_create= function(req,res){
     console.log('we are movie create')
     console.log(req.body)
         let movie=new db.Movies({
-        movieid:req.body.movieid,
-        moviename:req.body.moviename,
-        theaterno:req.body.theaterno,
-        seats:req.body.seats,
-        time:req.body.time,
-        date:req.body.date
+            moviename:req.body.moviename,
+            movieboughtdate:req.body.movieboughtdate,
+            genre:req.body.genre,
+            duration:req.body.duration,
+            year:req.body.year
     })
     movie.save().then(result=>{
         console.log('Saved>>',result)
-    }).catch(err=>console.log(err))
+        res.status(201).json({error:"Something went wrong"})
+    }).catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something went wrong"})
+    })
+   
+    // reservation.save().then(result=>{
+    //     console.log('Saved>>',result)
+    //     res.status(201).json({message:"Created reservation Doc"})
+    // }).catch(err=>{
+    //     console.log(err)
+    //     res.status(500).json({message:"Something Went Wrong"})
+    // })
 }
 
 

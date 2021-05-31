@@ -1,24 +1,10 @@
-const Reservation=require('../models/reservation.model');
+const db =require('../models/index');
 
-
-exports.reservation_create= async function(req,res){
-    try{
-        let reservation=new Reservation({
-             movieid:req.body.movieid,
-             bookedfor:req.body.bookedfor
-    })
-
-    const reserved= await reservation.save();
-    if(reserved){
-        res.status(201).send('You have been reserved successfully');
-    }
-    }catch(err){
-        return res.status(400).send('Something went wrong');
-    }
-
-
+exports.book_seat= async function(req,res){
+    var seats;
+    console.log('we have>>',req.body)
+    
 }
-
 
 exports.reservation_delete= async function(req,res){
     try{

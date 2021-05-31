@@ -1,17 +1,17 @@
-const { AuthMovies }=require('./movies.validmodel')
+const { AuthShowTime }=require('./showtime.validmodel')
 exports.validating=async function(req,res,next){
     const get={
         moviename:req.body.moviename,
-        movieboughtdate:req.body.movieboughtdate,
-        genre:req.body.genre,
-        duration:req.body.duration,
-        year:req.body.year
-        }
+        totalnoseats:req.body.totalnoseats,
+        seatsbooked:0,
+        time:req.body.time,
+        date:req.body.date
+    }
     try{
-        const result=await AuthMovies.validateAsync(get)
+        const result=await AuthShowTime.validateAsync(get)
         console.log(get)
         console.log(result)
-        res.status(200).json({message:"validated"})
+        // res.status(200).json({message:"validated"})
         next()
     }
     catch(err){
