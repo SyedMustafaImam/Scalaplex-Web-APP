@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Col, Container } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -126,12 +126,22 @@ export default AddNewMovie;
 
 
 
-function createData(moviename, movieboughtdate, genre, duration, year) {
+function CreateData(moviename, movieboughtdate, genre, duration, year) {
   return { moviename, movieboughtdate, genre, duration, year};
 }
 
+const fetchData = ()=>{
+axios.get('/index/admin/listmovies').then(
+  result=>{
+    console.log(result)
+  }
+).catch(err =>{console.log(err)})
+
+}
+
 const rows = [
-  createData('Godzila', 305, 3.7, 67, 4.3),
+  CreateData('Godzila', 305, 3.7, 67, 4.3),
+  CreateData('Moez', 305, 3.7, 67, 4.3),
   
 ];
 
@@ -164,7 +174,7 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'moviename', numeric: false, disablePadding: true, label: 'Movie Name' },
   { id: 'movieboughtdate', numeric: true, disablePadding: false, label: 'Movie Bought Date' },
-  { id: 'genre', numeric: true, disablePadding: false, label: 'Genre' },
+  { id: 'genre', numeric: false, disablePadding: false, label: 'Genre' },
   { id: 'duration', numeric: true, disablePadding: false, label: 'Duration' },
   { id: 'year', numeric: true, disablePadding: false, label: 'Year' },
 ];
@@ -249,6 +259,11 @@ const EnhancedTableToolbar = (props) => {
     console.log('clicked Delete Buttton')
     console.log('data to be delted: ', props.data)
   }
+  
+  useEffect(
+  fetchData()
+   ,[])
+    
   return (
     <Toolbar
       className={clsx(classes.root, {
@@ -317,7 +332,7 @@ const useStyles = makeStyles((theme) => ({
 export  function EnhancedTable() {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
-  const [orderBy, setOrderBy] = React.useState('calories');
+  const [orderBy, setOrderBy] = React.useState('year');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -331,7 +346,7 @@ export  function EnhancedTable() {
   
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
+      const newSelecteds = rows.map((n) => n.moviename);
       console.log('newSelecteds >>',newSelecteds)
       
       setSelected(newSelecteds);
@@ -342,12 +357,12 @@ export  function EnhancedTable() {
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, moviename) => {
+    const selectedIndex = selected.indexOf(moviename);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, moviename);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -373,7 +388,7 @@ console.log(newSelected)
 
  
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (moviename) => selected.indexOf(moviename) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -401,17 +416,17 @@ console.log(newSelected)
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.moviename);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.moviename)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.moviename}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -421,12 +436,12 @@ console.log(newSelected)
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row.moviename}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align="right">{row.movieboughtdate}</TableCell>
+                      <TableCell align="right">{row.genre}</TableCell>
+                      <TableCell align="right">{row.duration}</TableCell>
+                      <TableCell align="right">{row.year}</TableCell>
                     </TableRow>
                   );
                 })}

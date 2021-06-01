@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Row, Col, Container, Carousel, Form, Table } from 'react-bootstrap'
+import { Row, Col, Container, Carousel, Form, Table, Button } from 'react-bootstrap'
 import { Redirect, useHistory } from "react-router-dom";
 import '../home.css'
 import axios from 'axios'
@@ -20,6 +20,8 @@ const Home = () => {
 
     const [name, setName] = useState('');
     const [allmoviename, setAllMoviename] = useState([]);
+    const [movieFound, setMovieFound] = useState([]);
+
     const [alltime, setAllTime] = useState([])
     const [alldate, setAllDate] = useState([])
 
@@ -51,15 +53,17 @@ const Home = () => {
     }
 
     const getList = () => {
+
         axios.post('/index/admin/getmoveshowtime',
             {
-                moviename: 'Knight Rider', time: "11:30 AM", date: "10/5/2021"
+                moviename, time, date
             }).then(result => {
                 console.log(result)
-                setMoviename(result.data.moviename)
-                setTotalnoseats(result.data.totalnoseats)
-                setTime(result.data.time)
-                setDate(result.data.date)
+                // setMovieFound(result.data)
+                // setMoviename(result.data.moviename)
+                // setTotalnoseats(result.data.totalnoseats)
+                // setTime(result.data.time)
+                // setDate(result.data.date)
             }).catch(err => { console.log(err) })
     }
 
@@ -67,36 +71,39 @@ const Home = () => {
     useEffect(() => {
 
         const fetchFullListShowTime = () => {
-            axios.get('/index/admin/listshowtime').then(result => {
-                // console.log(result.data)
-                console.log(result.data)
-                result.data.forEach(val => {
-                    setAllMoviename(allmoviename => [...allmoviename, val.datamoviename])
-                    localStorage.setItem('movieData', val.moviename)
-                    //    setAllMoviename(allmoviename.concat(val.moviename))
-                    // movieName.push(val)
-                    // console.log(val.moviename)
-                });
-                console.log(localStorage.getItem('movieData'))
-                console.log(allmoviename)
-                // setAllMoviename(allmoviename=>[...allmoviename,movieName])
+           if(moviename!==''||time!==''||date!==''){
+            getList()
+           }
+           
+else{
+    axios.get('/index/admin/listshowtime').then(result => {
+               
+            setMovieFound(result.data)
+                
+        setAllMoviename(result.data)
 
-                // console.log('Move Name ')
-                // movieName.forEach(value=>{
-                //     console.log(value.moviename)
-                // })
-
-            }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+}
         }
 
 
-
+fetchFullListShowTime()
 
         auth();
-        // getList();
-        fetchFullListShowTime()
     }, [])
 
+    const checkMovie =()=>{
+        
+        axios.post('/index/admin/getmoveshowtime',
+        {
+            moviename, time, date
+        }).then(result => {
+            console.log(result)
+            // setMovieFound(result.data)
+            
+        }).catch(err => { console.log(err) })
+        
+    }
     return (
 
         < div className={"homeHeader"} >
@@ -152,24 +159,40 @@ const Home = () => {
                     <Row>
                         <Col><img src={imgc} />          Show Time</Col>
                         <Col>
-                            <Form.Control size="sm" as="select">
+
+                            <Form.Control size="sm" as="select" value={moviename} onChange={(e)=>{setMoviename(e.target.value)}}>
+                        <option >Select Movie</option>
                                 {
-                                    movieName.map((val) => {
-                                        <option value={val.moviename}>{val.moviename}</option>
-                                    })
-                                }
+                                    allmoviename.map((val,key) => { return (
+                                        <option >{val.moviename}</option>
+                                    )})
+                                    }
 
                             </Form.Control>
                         </Col>
                         <Col>
-                            <Form.Control size="sm" as="select">
-                                <option>Date</option>
+                            <Form.Control size="sm" as="select" value={date} onChange={(e)=>{setDate(e.target.value)}}>
+                            <option >Select Date</option>
+                            {
+                                    allmoviename.map((val,key) => { return (
+                                        <option >{val.date}</option>
+                                    )})
+                                    }
                             </Form.Control>
                         </Col>
                         <Col>
-                            <Form.Control size="sm" as="select">
-                                <option>Time</option>
+
+                            <Form.Control size="sm" as="select" value={time} onChange={(e)=>{setTime(e.target.value)}}>
+                        <option >Select Time</option>
+                            {
+                                    allmoviename.map((val,key) => { return (
+                                        <option >{val.time}</option>
+                                    )})
+                                    }
                             </Form.Control>
+                        </Col>
+                        <Col>
+                        <Button onClick={checkMovie}>🔍</Button>
                         </Col>
                     </Row>
                     <br />
@@ -180,7 +203,6 @@ const Home = () => {
 
 
                                     <tr>
-                                        <th>#</th>
                                         <th>Movie</th>
                                         <th>Date</th>
                                         <th>Time</th>
@@ -190,8 +212,8 @@ const Home = () => {
                                 <tbody>
 
                                     {
-                                        movieName.map((val) => (
-
+                                        movieFound.map((val,key) => {
+                                            return(
                                             <tr>
                                                 <td>{val.moviename}</td>
                                                 <td>{val.date}</td>
@@ -200,26 +222,17 @@ const Home = () => {
                                             </tr>
 
 
-                                        ))
+                                        )})
                                     }
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Godzilla VS Kong</td>
-                                        <td>01/06/2021</td>
-                                        <td>11:30 P.M.</td>
-                                        <td>30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>{moviename}</td>
-                                        <td>{date}</td>
-                                        <td>{time}</td>
-                                        <td>{totalnoseats}</td>
-                                    </tr>
+                                   
                                 </tbody>
                             </Table>
                         </Col>
                     </Row>
+   <prev>{JSON.stringify(moviename, null, 2)}</prev>
+   <prev>{JSON.stringify(date, null, 2)}</prev>
+   <prev>{JSON.stringify(time, null, 2)}</prev>
+
                 </Container>
             </div>
 

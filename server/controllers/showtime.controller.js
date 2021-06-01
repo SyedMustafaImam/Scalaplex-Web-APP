@@ -36,9 +36,8 @@ exports.create_showtime = (req, res) => {
     })
 }else{
     console.log("sorry date and time are taken")
-}
-    
-}
+}}
+
 exports.getmovie_showtime=(req,res)=>{
     console.log("we have>>",req.body)
     db.Showtime.findOne({moviename:req.body.moviename,time:req.body.time,date:req.body.date})
@@ -52,6 +51,7 @@ exports.getmovie_showtime=(req,res)=>{
         res.status(500).json({error:"Something Went Wrong"})
     })
 }
+
 exports.list_showtime=(req,res)=>{
     db.Showtime.find()
     .then(result=>{
