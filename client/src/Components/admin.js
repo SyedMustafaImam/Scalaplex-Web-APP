@@ -1,7 +1,7 @@
 import React from 'react'
 import {Tabs, Tab} from 'react-bootstrap'
 import AddNewMovie from '../Components/movie'
-import {EnhancedTable} from '../Components/movie'
+import {ListMovie} from '../Components/movie'
 
 
 import './admin.css'
@@ -13,7 +13,7 @@ export default function admin() {
     <AddNewMovie />
   </Tab>
   <Tab eventKey="movie_list" title="Movie List">
-    <EnhancedTable />
+    <ListMovie />
   </Tab>
   <Tab eventKey="customer" title="Customers">
   </Tab>
