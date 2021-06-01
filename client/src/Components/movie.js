@@ -24,7 +24,7 @@ const AddNewMovie = () => {
       api.post('/registermovie', moviedata).then(
 
         result => {
-          if (result.stats === 200) {
+          
             console.log(result)
             setMoviename('');
             setMoviebouthtdate('')
@@ -32,7 +32,7 @@ const AddNewMovie = () => {
             setYear('')
             setGenre('')
             window.alert("Movie Data Posted")
-          }
+          
         }).catch(err => { console.log(err) })
     } else {
       window.alert('Please Enter the Data in all the field!')

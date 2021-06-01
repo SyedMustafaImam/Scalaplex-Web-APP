@@ -13,7 +13,10 @@ exports.loginchk = async (req, res) => {
         } else {
             if(username=="admin"&& password=="abc.123"){
                 req.session.user=username;
-                res.redirect('/index/admin')
+                console.log('Admin Loged In')
+                console.log(password)
+                const dataToFront = {password, tokenAdmin}
+                res.send(dataToFront)
             }else{
             const userLogin = await db.Users.findOne({ username: username });
             console.log(userLogin);

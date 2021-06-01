@@ -23,7 +23,7 @@ class LoginForm extends Component {
         username: '',
         password: '',
         loginSuccess: false,
-
+        
 
     };
 
@@ -51,8 +51,14 @@ class LoginForm extends Component {
 
     ifLogined = () => {
         if (this.state.loginSuccess === true) {
+            if(this.state.password==='admin.123'){
+                return (<Redirect to='/admin' />) 
+            }else{
+        
             return (<Redirect to='/' />)
         }
+        }
+
     }
 
     checkLogin = () => {
@@ -66,6 +72,17 @@ class LoginForm extends Component {
                 // console.log('status :', result.statusText);
                 // console.log('status Code:', result.status);
                 this.setState({ loginSuccess: true })
+                console.log(result.data)
+               if(result.data.password==='admin.123'){
+                this.cookie.set('JWTtoken', result.data.tokenAdmin, {
+                    path: '/',
+                    expires: new Date(Date.now() + 1800000)
+
+                })
+                window.alert('Admin Login Successful')
+                
+               }
+               else{
                 if (result.status === 200) {
                     this.cookie.set('JWTtoken', result.data, {
                         path: '/',
@@ -77,7 +94,7 @@ class LoginForm extends Component {
                     window.alert(result.error)
                     // this.setState({ loginSuccess: false })
 
-                }
+                }}
             }).catch(err => {
                 console.log(err)
                 this.setState({ loginSuccess: false })

@@ -3,7 +3,8 @@ exports.list_customers=(req,res)=>{
     db.Users.find()
     .then(result=>{
         console.log(result)
-        res.status(200).json({message:"Working Properly"})
+        res.send(result)
+        // res.status(200).json({message:"Working Properly"})
     })
     .catch(err=>{
         console.log(err)

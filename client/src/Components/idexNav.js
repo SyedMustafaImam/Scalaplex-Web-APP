@@ -1,0 +1,16 @@
+import React, {useEffect} from 'react'
+import Navbar from './Navbars'
+import NavAdmin from './NavAdmin'
+import Cookies from 'universal-cookie';
+
+const cookie = new Cookies()
+ function IdexNav() {
+    return (
+        <>
+        {cookie.get('JWTtoken')==='/admin'?<NavAdmin/>: <Navbar />}
+    
+    </>
+    )
+}
+
+export default IdexNav
