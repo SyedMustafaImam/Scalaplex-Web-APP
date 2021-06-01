@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Col, Container } from 'react-bootstrap'
 import axios from 'axios'
+
 
 const AddShowTime = () => {
 
@@ -12,11 +13,19 @@ const api = axios.create({
   const [moviename, setMoviename] = useState('');
   const [Date, setDate] = useState('');
   const [Time, setTime] = useState('');
-  const [Seats, setSeats] = useState('');
-  
+  const [Seats, setSeats] = useState('55');
+  const [allmoviename, setAllMoviename] = useState([]);
+  const [movieFound, setMovieFound] = useState([]);
+
+  useEffect(() => {
+    axios.get('/index/admin/listmovies').then(result => {
+        setMovieFound(result.data)
+        setAllMoviename(result.data)
+    }).catch(err => console.log(err))},[]
+    )
 
   const postData = () => {
-    if (moviename !== '' && Date !== '' && Time !== '' && Seats !== '') {
+    if (moviename !== '' && Date !== '' && Time !== '') {
       const showdata = { moviename, Date, Time, Seats }
       api.post('/setshowtime', showdata).then(
 
@@ -45,12 +54,18 @@ const api = axios.create({
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Movie Name</Form.Label>
-            <Form.Control size="sm" as="select" type="text" name='moviename' value={moviename} placeholder="Enter Movie Name" onChange={(e) => { setMoviename(e.target.value) }} />
+            <Form.Control size="sm" as="select" type="text" name='moviename' value={moviename} placeholder="Enter Movie Name" onChange={(e) => { setMoviename(e.target.value) }}>
+            {
+                allmoviename.map((val,key) => { return (
+                    <option >{val.moviename}</option>
+                    )})
+                }
+            </Form.Control> 
           </Form.Group>
 
           <Form.Group as={Col} controlId="formGridDate">
             <Form.Label>Show Date</Form.Label>
-            <Form.Control type="date" placeholder="Date" value={Date} onChange={(e) => { setDate(e.target.value) }} />
+            <Form.Control type="date" name='date' placeholder="Date" value={Date} onChange={(e) => { setDate(e.target.value) }} />
           </Form.Group>
         </Form.Row>
 
@@ -63,7 +78,7 @@ const api = axios.create({
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Total Seats</Form.Label>
-            <Form.Control type="text" name='seats' value={Seats} placeholder="Number of Seats" onChange={(e) => { setSeats(e.target.value) }} />
+            <Form.Control type="number" name='seats' value={Seats} placeholder="Number of Seats" onChange={(e) => { setSeats(e.target.value) }} />
           </Form.Group>
         </Form.Row>
 
