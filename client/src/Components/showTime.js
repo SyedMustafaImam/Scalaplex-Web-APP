@@ -48,7 +48,7 @@ const api = axios.create({
     event.preventDefault();
   }
 
-  return <div>
+  return (<div>
     <Container style={{ 'height': '100vh' }}>
       <Form method="POST" onSubmit={handleSubmit}>
         <Form.Row>
@@ -93,7 +93,7 @@ const api = axios.create({
 <prev>{JSON.stringify(totalnoseats, null, 2)}</prev> 
 
     </Container>
-  </div>;
+  </div>);
 };
 
 export default AddShowTime;

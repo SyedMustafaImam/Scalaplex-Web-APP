@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, NavLink } from 'react'
 import { Row, Col, Container, Carousel, Form, Table, Button } from 'react-bootstrap'
 import { Redirect, useHistory } from "react-router-dom";
 import '../home.css'
@@ -232,7 +232,12 @@ fetchFullListShowTime()
    <prev>{JSON.stringify(moviename, null, 2)}</prev>
    <prev>{JSON.stringify(date, null, 2)}</prev>
    <prev>{JSON.stringify(time, null, 2)}</prev>
-
+                    <Row>
+                        <Col>
+                            <Button variant="outline-light">Book Tickets</Button>
+                        </Col>
+                    </Row>
+                    
                 </Container>
             </div>
 
