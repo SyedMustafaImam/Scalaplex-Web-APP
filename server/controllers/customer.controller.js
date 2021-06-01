@@ -30,5 +30,25 @@ exports.delete_customer=(req,res)=>{
     }
 }
 exports.update_customer=(req,res)=>{
-    
+    console.log(req.params)
+    db.Users.findById(req.params.id)
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({message:"Got the UpdateForm"})
+    })
+    .catch(err=>{
+        res.status(500).json({error:"Something Went Wrong"})
+    })
+}
+exports.now_updated=(req,res)=>{
+    console.log(req.params)
+    db.Users.findByIdAndUpdate(req.params)
+    .then(result=>{
+        console.log(result)
+        res.status(200).json({message:"Updated"})
+    })
+    .catch(err=>{
+        console.log(err)
+        res.status(500).json({error:"Something went wrong"})
+    })
 }

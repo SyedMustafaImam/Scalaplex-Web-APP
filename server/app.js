@@ -8,6 +8,7 @@ var dotenv = require('dotenv');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var customer =require('./routes/customer')
 var app = express();
 dotenv.config({ path: './config.env' })
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', usersRouter)
 app.use('/index', indexRouter);
+app.use('/customer',customer)
 
 
 

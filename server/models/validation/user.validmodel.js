@@ -1,10 +1,10 @@
 const joi = require('joi')
 
 let AuthUser= joi.object({
-    firstName:joi.string().max(11).required(),
-    lastName: joi.string().max(11).required(),
+    firstName:joi.string().required(),
+    lastName: joi.string().required(),
     username: joi.string().email().required(),
-    gender: joi.string().required(),
+    gender: joi.string().valid('female','male').required(),
     contact: joi.string().length(11).required(),
     city: joi.string().required(),
     address:joi.string().required(),
