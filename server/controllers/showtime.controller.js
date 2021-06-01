@@ -56,6 +56,7 @@ exports.list_showtime=(req,res)=>{
     db.Showtime.find()
     .then(result=>{
         console.log(result)
+        
         res.status(200).send(result)
     })
     .catch(err=>{
