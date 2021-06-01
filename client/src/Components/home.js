@@ -192,7 +192,7 @@ fetchFullListShowTime()
                             </Form.Control>
                         </Col>
                         <Col>
-                        <Button onClick={checkMovie}>🔍</Button>
+                        <Button variant="link" style={{'font-size':'20px'}} onClick={checkMovie}>🔍</Button>
                         </Col>
                     </Row>
                     <br />

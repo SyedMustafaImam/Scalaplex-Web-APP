@@ -11,7 +11,7 @@ exports.validating=async function(req,res,next){
         const result=await AuthMovies.validateAsync(get)
         console.log(get)
         console.log(result)
-        console.log(`validated`, validated)
+        console.log(`validated`, result)
         // res.status(200).json({message:"validated"})
         next()
     }

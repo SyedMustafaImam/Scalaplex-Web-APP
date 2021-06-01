@@ -10,7 +10,7 @@ exports.create_showtime = (req, res) => {
     })
     .catch(err=>console.log(err))
     if(trigger!=null){
-    let showtime = new db.Showtime({
+    let showtime = new db.Showtime({    
         moviename:req.body.moviename,
         totalnoseats:req.body.totalnoseats,
         seatsbooked: [],
