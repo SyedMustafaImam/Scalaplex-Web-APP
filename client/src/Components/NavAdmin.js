@@ -5,7 +5,7 @@ import { useCookies } from 'react-cookie';
 import { NavLink, Redirect } from 'react-router-dom'
 import '../NavBar.css'
 
-export default function Navbars() {
+export default function NavAdmin() {
     const [cookies, setCookie, removeCookie] = useCookies(['JWTtoken']);
     const [isLogedOut, setisLogedOut] = useState(false)
 

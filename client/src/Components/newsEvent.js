@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Container, Carousel, Form, Table } from 'react-bootstrap'
 import '../newsEvent.css'
 
-const newsEvent =()=> {
+const NewsEvent =()=> {
 
     return (
     < div className = { "NEHeader" } >
@@ -95,4 +95,4 @@ const newsEvent =()=> {
     )
 }
                       
-export default newsEvent;
+export default NewsEvent;

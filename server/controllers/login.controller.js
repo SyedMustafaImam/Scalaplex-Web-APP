@@ -11,9 +11,10 @@ exports.loginchk = async (req, res) => {
         if (!username || !password) {
             return res.status(404).json({ error: 'Please enter all the credentials' })
         } else {
-            if(username=="admin"&& password=="abc.123"){
+            if(username=="admin"&& password=="admin.123"){
                 req.session.user=username;
                 console.log('Admin Loged In')
+                const tokenAdmin = '/admin'
                 console.log(password)
                 const dataToFront = {password, tokenAdmin}
                 res.send(dataToFront)

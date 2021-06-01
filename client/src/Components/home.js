@@ -234,10 +234,15 @@ fetchFullListShowTime()
    <prev>{JSON.stringify(time, null, 2)}</prev>
                     <Row>
                         <Col>
-                            <Button variant="outline-light">Book Tickets</Button>
+                        
+                       
+
                         </Col>
                     </Row>
-                    
+                    <Button  onClick={()=>{history.push("/Reservation")}}>
+                                    Book Tickets
+                            </Button>
+
                 </Container>
             </div>
 

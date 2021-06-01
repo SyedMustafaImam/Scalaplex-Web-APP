@@ -77,7 +77,7 @@ const api = axios.create({
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
-            <Form.Label>Total Seats</Form.Label>
+            <Form.Label>Total No of Seats</Form.Label>
             <Form.Control type="number" name='totalnoseats' value={totalnoseats} placeholder="Number of Seats" onChange={(e) => { settotalnoseats(e.target.value) }} />
           </Form.Group>
         </Form.Row>

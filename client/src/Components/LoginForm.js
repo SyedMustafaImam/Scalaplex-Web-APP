@@ -4,7 +4,6 @@ import '../Form.css'
 import Cookies from 'universal-cookie';
 import axios from 'axios'
 import { NavLink, Redirect } from "react-router-dom";
-import img12 from '../images/background.jpg'
 
 
 class LoginForm extends Component {
@@ -74,8 +73,8 @@ class LoginForm extends Component {
                 this.setState({ loginSuccess: true })
                 console.log(result.data)
                if(result.data.password==='admin.123'){
-                this.cookie.set('JWTtoken', result.data.tokenAdmin, {
-                    path: '/',
+                this.cookie.set('admin', '/admin', {
+                    path: '/admin',
                     expires: new Date(Date.now() + 1800000)
 
                 })
