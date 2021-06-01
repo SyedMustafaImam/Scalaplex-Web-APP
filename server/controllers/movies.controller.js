@@ -1,8 +1,10 @@
 const db=require('../models/index');
 exports.movie_create=(req,res)=>{
-    console.log('we are movie create')
-    console.log(req.body)
-
+    var trigger;
+    console.log('we got >>', req.body)
+    trigger= await db.Movies.findOne({moviename:req.body.moviename})
+    console.log(trigger)
+    if(!trigger){
         let movie=new db.Movies({
             moviename:req.body.moviename,
             movieboughtdate:req.body.movieboughtdate,
@@ -17,6 +19,10 @@ exports.movie_create=(req,res)=>{
         console.log(err)
         res.status(500).json({error:"Something went wrong"})
     })
+}else{
+    console.log('Movie Already Exist in the database')
+    res.status(200).json({message:"Movie Already Exist in the database"})
+}
 }
 
 

@@ -4,7 +4,7 @@ import '../Form.css'
 import Cookies from 'universal-cookie';
 import axios from 'axios'
 import { NavLink, Redirect } from "react-router-dom";
-
+import img12 from '../images/background.jpg'
 
 
 class LoginForm extends Component {
@@ -100,8 +100,9 @@ class LoginForm extends Component {
 
 
         return (
-
+           
             <div id="logCont" transition={false} className="container mainDiv" >
+             
                 <Row className=" loginBox">
                     <Col >
                         <Form method="POST"  onSubmit={this.handleSubmit}>
@@ -146,7 +147,6 @@ class LoginForm extends Component {
                 <br></br>
 
                 {/* <prev>{JSON.stringify(this.state, null, 2)}</prev> */}
-
             </div >
 
 

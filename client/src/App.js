@@ -25,8 +25,6 @@ function App() {
     <Router>
       <div class="myBody">
         <Navbars />
-        
-
         <Switch>
 
           <Route exact path="/LoginForm">

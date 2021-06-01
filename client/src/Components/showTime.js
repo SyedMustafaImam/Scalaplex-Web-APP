@@ -13,7 +13,7 @@ const api = axios.create({
   const [moviename, setMoviename] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [totalnoseats, settotalnoseats] = useState('');
+  const [totalnoseats, settotalnoseats] = useState('55');
   const [allmoviename, setAllMoviename] = useState([]);
   const [movieFound, setMovieFound] = useState([]);
 
