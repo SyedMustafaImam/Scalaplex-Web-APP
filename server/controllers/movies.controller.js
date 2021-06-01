@@ -1,5 +1,5 @@
 const db=require('../models/index');
-exports.movie_create=(req,res)=>{
+exports.movie_create=async(req,res)=>{
     var trigger;
     console.log('we got >>', req.body)
     trigger= await db.Movies.findOne({moviename:req.body.moviename})
