@@ -100,23 +100,24 @@ export default AddNewMovie;
 
 function ListMovie() {
   const [allMovies,setAllMovies]=useState([])
-
+  
+  const fetchData = ()=>{
+    axios.get('/index/admin/listmovies').then(
+      result=>{
+        console.log(result.data)
+        setAllMovies(result.data)
+      }
+    ).catch(err =>{console.log(err)})
+    }
 
     useEffect(() => {
 
-      const fetchData = ()=>{
-        axios.get('/index/admin/listmovies').then(
-          result=>{
-            console.log(result.data)
-            setAllMovies(result.data)
-          }
-        ).catch(err =>{console.log(err)})
-        }
+      
 
 
     fetchData()
 
-    console.log('Data:',allMovies[0].moviename)
+    // console.log('Data:',allMovies[0].moviename)
       }
     , [])
     
