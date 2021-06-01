@@ -11,9 +11,9 @@ const api = axios.create({
   })
 
   const [moviename, setMoviename] = useState('');
-  const [Date, setDate] = useState('');
-  const [Time, setTime] = useState('');
-  const [Seats, setSeats] = useState('55');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [totalnoseats, settotalnoseats] = useState('');
   const [allmoviename, setAllMoviename] = useState([]);
   const [movieFound, setMovieFound] = useState([]);
 
@@ -25,8 +25,8 @@ const api = axios.create({
     )
 
   const postData = () => {
-    if (moviename !== '' && Date !== '' && Time !== '') {
-      const showdata = { moviename, Date, Time, Seats }
+    if (moviename !== '' && date !== '' && time !== '' && totalnoseats!=='') {
+      const showdata = { moviename, date, time, totalnoseats }
       api.post('/setshowtime', showdata).then(
 
         result => {
@@ -35,7 +35,7 @@ const api = axios.create({
             setMoviename('');
             setDate('')
             setTime('')
-            setSeats('')
+            settotalnoseats('')
             window.alert("New Show Added")
           }
         }).catch(err => { console.log(err) })
@@ -54,7 +54,7 @@ const api = axios.create({
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Movie Name</Form.Label>
-            <Form.Control size="sm" as="select" type="text" name='moviename' value={moviename} placeholder="Enter Movie Name" onChange={(e) => { setMoviename(e.target.value) }}>
+            <Form.Control as="select" type="text" name='moviename' value={moviename} placeholder="Enter Movie Name" onChange={(e) => { setMoviename(e.target.value) }}>
             {
                 allmoviename.map((val,key) => { return (
                     <option >{val.moviename}</option>
@@ -65,20 +65,20 @@ const api = axios.create({
 
           <Form.Group as={Col} controlId="formGridDate">
             <Form.Label>Show Date</Form.Label>
-            <Form.Control type="date" name='date' placeholder="Date" value={Date} onChange={(e) => { setDate(e.target.value) }} />
+            <Form.Control type="date" name='date' placeholder="Date" value={date} onChange={(e) => { setDate(e.target.value) }} />
           </Form.Group>
         </Form.Row>
 
         <Form.Group as={Col} controlId="formGridGenre">
           <Form.Label>Show Time</Form.Label>
-          <Form.Control type="time" name='time' value={Time} placeholder="Enter Show Time" onChange={(e) => { setTime(e.target.value) }} />
+          <Form.Control type="time" name='time' value={time} placeholder="Enter Show Time" onChange={(e) => { setTime(e.target.value) }} />
         </Form.Group>
 
 
         <Form.Row>
           <Form.Group as={Col} controlId="formGridCity">
             <Form.Label>Total Seats</Form.Label>
-            <Form.Control type="number" name='seats' value={Seats} placeholder="Number of Seats" onChange={(e) => { setSeats(e.target.value) }} />
+            <Form.Control type="number" name='totalnoseats' value={totalnoseats} placeholder="Number of Seats" onChange={(e) => { settotalnoseats(e.target.value) }} />
           </Form.Group>
         </Form.Row>
 
@@ -87,11 +87,10 @@ const api = axios.create({
         </Button>
       </Form>
 
-      {/* <prev>{JSON.stringify(moviename, null, 2)}</prev>
-<prev>{JSON.stringify(moviebouthtdate, null, 2)}</prev>
-<prev>{JSON.stringify(genre, null, 2)}</prev>
-<prev>{JSON.stringify(duration, null, 2)}</prev>
-<prev>{JSON.stringify(year, null, 2)}</prev> */}
+<prev>{JSON.stringify(moviename, null, 2)}</prev>
+<prev>{JSON.stringify(date, null, 2)}</prev>
+<prev>{JSON.stringify(time, null, 2)}</prev>
+<prev>{JSON.stringify(totalnoseats, null, 2)}</prev> 
 
     </Container>
   </div>;
