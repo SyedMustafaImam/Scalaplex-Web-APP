@@ -1,8 +1,8 @@
-const db = require('../models/index')   
+const db = require('../models/index')
 
 exports.checkUser = (req, res) => {
     res.cookie('SignUp', 'Mustafa')
-    const  username  = req.params.username;
+    const username = req.params.username;
     console.log('Request Made For Check User')
     console.log('Data Recived')
     console.log('-------------------')
@@ -23,11 +23,12 @@ exports.register = (req, res) => {
     console.log('-------------------')
     console.log(req.body)
 
-    let { firstName, lastName, username, profession, degree, department, email, password} = req.body;    if (!firstName || !lastName || !username ||  !email || !password || !profession || !degree ||!department ) {
+    let { firstName, lastName, username, gender, contact, city, address, password } = req.body; 
+    if (!firstName || !lastName || !username || !gender || !password || !contact || !city || !address ) {
         console.log('Incomplete Data from front end')
         res.status(422).json({ error: "All feilds not filled" })
     } else {
-        db.Users.findOne({ username: req.body.username, email: email }, (err, exists) => {
+        db.Users.findOne({ username: req.body.username }, (err, exists) => {
             if (exists) {
                 console.log(username, "Username not acceptable")
                 return res.status(422).json({ error: "First User Name already exists" })
@@ -38,10 +39,10 @@ exports.register = (req, res) => {
                     firstName,
                     lastName,
                     username,
-                    profession,
-                    degree,
-                    department,
-                    email,
+                    gender,
+                    contact,
+                    city,
+                    address,
                     password,
                 })
                 reg.save().then(result => {
@@ -49,7 +50,7 @@ exports.register = (req, res) => {
                     return res.status(201).json({ message: "User registerd Successfully" })
                 }).catch(err => {
                     console.log(err)
-                   return res.status(500).json({ message: "Failed to register" })
+                    return res.status(500).json({ message: "Failed to register" })
                 }
                 )
                 // res.redirect('/')
@@ -57,10 +58,10 @@ exports.register = (req, res) => {
         }).then((out) => {
             console.log(out)
             console.log('user name already exists')
-                                }).catch(err => {
-                                    console.log(err)
+        }).catch(err => {
+            console.log(err)
             return res.status(500).json({ message: "Failed to register" })
-        
+
         })
     }
 }

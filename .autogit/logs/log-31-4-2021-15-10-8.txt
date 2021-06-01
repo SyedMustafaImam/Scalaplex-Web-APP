@@ -1,0 +1,15 @@
+-------------------- Auto-Git Log --------------------
+		Mon May 31 2021 15:10:08 GMT+0500 (Pakistan Standard Time)
+------------------------------------------------------
+
+Modified files:
+
+
+Created files:
+* client/src/Components/adminDashboard.js
+
+
+Deleted files:
+
+
+Renamed files:

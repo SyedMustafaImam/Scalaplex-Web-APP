@@ -1,0 +1,36 @@
+body {
+    height: 100%;
+  }
+  
+  .aboutHeader {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    
+    height: 100%;
+    vertical-align: middle;
+    padding: 120px 0px;
+  }
+  .aboutFooter {
+    height: 5%;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    vertical-align: middle;
+    padding: 120px 0px;
+  }
+  
+  .heading {
+    font-size: 58px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: azure;
+  }
+  
+  .para {
+    font-size: 18px;
+    font-stretch: 400;
+    text-align: left;
+    color: rgb(231, 231, 231);
+  }

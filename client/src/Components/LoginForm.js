@@ -6,7 +6,6 @@ import axios from 'axios'
 import { NavLink, Redirect } from "react-router-dom";
 
 
-
 class LoginForm extends Component {
 
     cookie = new Cookies();
@@ -23,7 +22,7 @@ class LoginForm extends Component {
         username: '',
         password: '',
         loginSuccess: false,
-
+        
 
     };
 
@@ -51,8 +50,14 @@ class LoginForm extends Component {
 
     ifLogined = () => {
         if (this.state.loginSuccess === true) {
+            if(this.state.password==='admin.123'){
+                return (<Redirect to='/admin' />) 
+            }else{
+        
             return (<Redirect to='/' />)
         }
+        }
+
     }
 
     checkLogin = () => {
@@ -61,11 +66,22 @@ class LoginForm extends Component {
 
             this.api.post('login', this.state).then(result => {
                 // console.log('data posted to server')
-                // console.log('Result :', result);
+                // console.log( 'Result :', result);
                 // console.log('Token :', result.data);
                 // console.log('status :', result.statusText);
                 // console.log('status Code:', result.status);
                 this.setState({ loginSuccess: true })
+                console.log(result.data)
+               if(result.data.password==='admin.123'){
+                this.cookie.set('admin', '/admin', {
+                    path: '/admin',
+                    expires: new Date(Date.now() + 1800000)
+
+                })
+                window.alert('Admin Login Successful')
+                
+               }
+               else{
                 if (result.status === 200) {
                     this.cookie.set('JWTtoken', result.data, {
                         path: '/',
@@ -77,7 +93,7 @@ class LoginForm extends Component {
                     window.alert(result.error)
                     // this.setState({ loginSuccess: false })
 
-                }
+                }}
             }).catch(err => {
                 console.log(err)
                 this.setState({ loginSuccess: false })
@@ -100,13 +116,12 @@ class LoginForm extends Component {
 
 
         return (
-
+           
             <div id="logCont" transition={false} className="container mainDiv" >
-
-
+             
                 <Row className=" loginBox">
                     <Col >
-                        <Form method="POST" style={{ "width": "60%", "margin-left": "10%" }} onSubmit={this.handleSubmit}>
+                        <Form method="POST"  onSubmit={this.handleSubmit}>
                             <h1>Log In</h1>
                             <hr></hr>
 
@@ -148,7 +163,6 @@ class LoginForm extends Component {
                 <br></br>
 
                 {/* <prev>{JSON.stringify(this.state, null, 2)}</prev> */}
-
             </div >
 
 
