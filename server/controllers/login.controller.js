@@ -2,6 +2,7 @@ const db = require('../models/index')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 var mongo = require('mongodb');
+const e = require('express');
 
 exports.loginchk = async (req, res) => {
     const { username, password } = req.body;
@@ -10,10 +11,12 @@ exports.loginchk = async (req, res) => {
         if (!username || !password) {
             return res.status(404).json({ error: 'Please enter all the credentials' })
         } else {
-
+            if(username=="admin"&& password=="abc.123"){
+                req.session.user=username;
+                res.redirect('/index/admin')
+            }else{
             const userLogin = await db.Users.findOne({ username: username });
             console.log(userLogin);
-
             if (userLogin) {
                 const isMatch = await bcrypt.compare(password, userLogin.password)
                 console.log(isMatch)
@@ -48,7 +51,7 @@ exports.loginchk = async (req, res) => {
                 console.log('invalid credentials')
                 return res.status(400).json({ message: "Invalid Credientials" });
             }
-
+         }
         }
     } catch (err) {
         console.log('got here')

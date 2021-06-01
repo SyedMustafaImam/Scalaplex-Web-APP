@@ -61,7 +61,7 @@ class LoginForm extends Component {
 
             this.api.post('login', this.state).then(result => {
                 // console.log('data posted to server')
-                // console.log('Result :', result);
+                // console.log( 'Result :', result);
                 // console.log('Token :', result.data);
                 // console.log('status :', result.statusText);
                 // console.log('status Code:', result.status);
