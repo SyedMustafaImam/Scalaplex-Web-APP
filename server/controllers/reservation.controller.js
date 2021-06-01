@@ -25,7 +25,7 @@ exports.book_seat= async function(req,res){
             console.log(err)
             res.status(500).json({error:"Something Went Wrong"})
         })
-        await db.Reservation.findOneAndUpdate({moviename:req.body.moviename},{$push:{bookedfor:req.body.bookedfor}})
+        await db.Reservation.findOneAndUpdate({moviename:req.body.moviename},{$push:{bookedfor:req.body.bookedfor+" SeatNo: "+req.body.seatno}})
         .then(result=>{
             console.log(result)
             res.status(201).json({message:"Created Showtime"})
@@ -72,7 +72,7 @@ exports.customer_book_seat= async function(req,res){
             console.log(err)
             res.status(500).json({error:"Something Went Wrong"})
         })
-        await db.Reservation.findOneAndUpdate({moviename:req.body.moviename},{$push:{bookedfor:req.body.bookedfor}})
+        await db.Reservation.findOneAndUpdate({moviename:req.body.moviename},{$push:{bookedfor:req.body.bookedfor+" SeatNo: "+req.body.seatno}})
         .then(result=>{
             console.log(result)
             res.status(201).json({message:"Created Showtime"})
