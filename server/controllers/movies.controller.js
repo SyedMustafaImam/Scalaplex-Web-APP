@@ -56,8 +56,8 @@ exports.movie_list=(req,res)=>{
     db.Movies.find()
     .then(result=>{
        console.log(result)
-       
-       res.status(200).send(result)
+       res.send(result)
+    //    res.status(200).json({message:"List is available"})
     })
     .catch(err=>{
        console.log(err)

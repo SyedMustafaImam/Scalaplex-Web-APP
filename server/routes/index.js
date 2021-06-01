@@ -21,7 +21,7 @@ router.post('/admin/updatemoviedetails',moviecontroller.movie_update)
 router.get('/admin/listmovies',moviecontroller.movie_list)
 //=============Showtime
 router.post('/admin/getmoveshowtime',showtimecontroller.getmovie_showtime)
-router.post('/admin/setshowtime',showtimevalidation.validating,showtimecontroller.create_showtime)
+router.post('/admin/setshowtime',showtimecontroller.create_showtime)
 router.get('/admin/listshowtime',showtimecontroller.list_showtime)
 //=============Reservation
 router.post('/admin/bookseat',validatereservation.validating,reservationcontroller.book_seat)
